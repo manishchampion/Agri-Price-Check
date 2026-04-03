@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriPriceCheck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">AgriPriceCheck</p>
+          <h1>Monitor crop prices with a live market view built for fast decisions.</h1>
+          <p>
+            Track current rates, compare historical values, and spot price movements
+            across crops and locations from one responsive dashboard.
+          </p>
+        </div>
+
+        <div class="hero-status">
+          <span class="status-dot"></span>
+          <span>Live simulation refresh every 12s</span>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="panel controls-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Filters</p>
+              <h2>Select Crop Market</h2>
+            </div>
+          </div>
+
+          <div class="filters-grid">
+            <label class="field">
+              <span>Crop</span>
+              <select id="cropSelect"></select>
+            </label>
+
+            <label class="field">
+              <span>Location</span>
+              <select id="locationSelect">
+                <option value="All">All Locations</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel stats-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Dashboard</p>
+              <h2>Selected Crop Snapshot</h2>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card crop-card">
+              <p>Selected Crop</p>
+              <h3 id="selectedCropName">-</h3>
+            </article>
+            <article class="stat-card price-card">
+              <p>Current Price</p>
+              <h3 id="currentPrice">Rs. 0</h3>
+            </article>
+            <article class="stat-card change-card">
+              <p>Price Change</p>
+              <h3 id="priceChange">0%</h3>
+              <span id="priceChangeMeta" class="change-meta">No change yet</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel chart-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Trend</p>
+              <h2>Price Movement Over Time</h2>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="priceChart"></canvas>
+          </div>
+        </section>
+
+        <section class="panel table-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-label">History</p>
+              <h2>Historical Price Data</h2>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Crop Name</th>
+                  <th>Price</th>
+                  <th>Date</th>
+                  <th>Location</th>
+                </tr>
+              </thead>
+              <tbody id="priceTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="mobile-cards" id="mobileCards"></div>
+          <p class="empty-state hidden" id="emptyState">No price data available.</p>
+        </section>
+
+        <section class="panel add-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Add Entry</p>
+              <h2>Record New Crop Price</h2>
+            </div>
+          </div>
+
+          <form id="priceForm" class="price-form">
+            <label class="field">
+              <span>Crop Name</span>
+              <input id="nameInput" type="text" placeholder="e.g. Rice" required />
+            </label>
+
+            <label class="field">
+              <span>Price</span>
+              <input id="priceInput" type="number" min="0" step="0.01" required />
+            </label>
+
+            <div class="form-row">
+              <label class="field">
+                <span>Date</span>
+                <input id="dateInput" type="date" required />
+              </label>
+
+              <label class="field">
+                <span>Location</span>
+                <input
+                  id="locationInput"
+                  type="text"
+                  placeholder="e.g. Punjab"
+                  required
+                />
+              </label>
+            </div>
+
+            <p id="formMessage" class="form-message"></p>
+            <button class="primary-button" type="submit">Add Price Entry</button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
